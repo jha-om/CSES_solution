@@ -1,5 +1,5 @@
 #include <iostream>
-#include <set>
+#include <algorithm>
 
 using namespace std;
 
@@ -9,14 +9,19 @@ void solve()
 {
     int n;
     cin >> n;
-    set<int> s;
+    int *x = new int[n];
     for (int i = 0; i < n; i++)
     {
-        int x;
-        cin >> x;
-        s.insert(x);
+        cin >> x[i];
     }
-    cout << s.size();
+    sort(x, x + n);
+    int cnt = 1;
+    for (int i = 1; i < n; i++)
+    {
+        if (x[i - 1] != x[i])
+            cnt++;
+    }
+    cout << cnt;
 }
 int main()
 {
@@ -30,4 +35,3 @@ int main()
     // {
     // }
     return 0;
-}
