@@ -11,25 +11,23 @@ double getCurrentTime()
     return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
 
-multiset<int> prices;
-
 void solve()
 {
     int n;
     cin >> n;
-    set<pair<int, int>> s;
-    while(n--) {
-        int a, b;
-        cin >> a >> b;
-        s.insert({a, 1});
-        s.insert({b, -1});
+    vector<pair<int, int>> v(n);
+    for (int i = 0; i < n; i++) {
+        cin >> v[i].second >> v[i].first;
     }
-    int c = 0, mc = 0;
-    for (auto x : s) {
-        c += x.second;
-        mc = max(mc, c);
+    sort(v.begin(), v.end());
+    int ans = 1, end = v[0].first;
+    for (int i = 1; i < n; i++) {
+        if(v[i].second >= end) {
+            ans++;
+            end = v[i].first;
+        }
     }
-    cout << mc << nline;
+    cout << ans << nline;
 }
 
 int main()
